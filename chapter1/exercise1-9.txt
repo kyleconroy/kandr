@@ -1,0 +1,2 @@
+This     string     should   only  
+have   regular numbers of     spaces
