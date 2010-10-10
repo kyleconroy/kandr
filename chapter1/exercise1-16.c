@@ -38,10 +38,15 @@ int getline(char s[], int lim)
         if (i < lim-1)
             s[i] = c;
     if (c == '\n') {
-        s[i] = c;
+        if (i < lim-1)
+            s[i] = c;
         ++i;
     }
-    s[i] = '\0';
+
+    if (i < lim-1)
+        s[i] = '\0';
+    else
+        s[lim-1] = '\0';
     return i;
 }
 

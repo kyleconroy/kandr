@@ -1,6 +1,5 @@
 /* Exercise 1-17
-   Revise the main routine of the longest line program so it will correctly
-   print the length of the longest line, and as much of the line as possible
+   Write a program to print all input lines that are longer than 80 characters
 */
 
 #include <stdio.h>
@@ -16,24 +15,30 @@ int main()
     char line[MAXLINE];
 
     while ((len = getline(line, MAXLINE)) > 0)
-        if (len > 0 && len < MAXLINE)
-            printf("%s", line);
-        else if (len > MAXLINE)
+        if (len > 80)
             printf("%s\n", line);
     return 0;
 }
 
+
 int getline(char s[], int lim)
 {
     int c, i;
+    for (i=0; (c=getchar())!=EOF && c!='\n'; ++i)
+        if (i < lim-1)
+            s[i] = c;
 
-    for (i=0; i<lim-1 && (c=getchar())!=EOF && c!='\n'; ++i)
-        s[i] = c;
     if (c == '\n') {
-        s[i] = c;
+        if (i < lim-1)
+            s[i] = c;
         ++i;
     }
-    s[i] = '\0';
+    
+    if (i < lim-1)
+        s[i] = '\0';
+    else
+        s[lim-1] = '\0';
+
     return i;
 }
 
